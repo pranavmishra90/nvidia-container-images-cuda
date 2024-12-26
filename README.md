@@ -22,6 +22,12 @@ Here is an example on how to build an multi-arch container image for Ubuntu `24.
 WARNING: cudgl image builds *REQUIRE* a secure registry to push built intermediate images to since buildkit does not easily allow using local image references from the build container.
 
 ```bash
+# Create the docker buildkit builder
+
+docker buildx create --use --platform linux/x86_64 --config=cuda-buildkit-config.toml --driver-opt image=moby/buildkit:v0.18.1 --name cuda --node cuda
+```
+
+```bash
 ./build.sh -d --image-name pranavmishra90/cuda --cuda-version 12.6.3 --os ubuntu --os-version 24.04 --arch x86_64 --push
 ```
 
