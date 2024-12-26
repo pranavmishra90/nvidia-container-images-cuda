@@ -1,0 +1,16 @@
+debug=true
+trace=false
+
+
+
+[dns]
+  nameservers=["1.1.1.1","8.8.8.8"]
+
+# [registry."docker.io"]
+#   # mirror configuration to handle path in case a mirror registry requires a /project path rather than just a host:port
+#   mirrors = ["localhost:5000"]
+
+
+# [registry."localhost:5000"]
+#   http = true
+#   insecure = true
