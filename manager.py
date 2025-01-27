@@ -1242,7 +1242,7 @@ class ManagerGenerate(Manager):
                                 labels[2] = value
                             if value in ("base", "devel", "runtime"):
                                 labels[3] = value
-                            if re.compile(r"centos*|ubuntu*|ubi*|rocky*|amzn*|cm.").match(value):
+                            if re.compile(r"centos*|ubuntu*|ubi*|rocky*|oracle*|amzn*|cm.").match(value):
                                 operating_system = value.split("-")
                                 labels[4] = operating_system[0]
                                 dotdistro = labels[4]
@@ -1307,6 +1307,10 @@ class ManagerGenerate(Manager):
             elif "amzn" in OS:
                 distro = OS.split("amzn")
                 platforms[OS]["name"] = f"Amzn {distro[1]}"
+                platforms[OS]["arches"] = get_arches_for_platform(OS)
+            elif "oracle" in OS:
+                distro = OS.split("oraclelinux")
+                platforms[OS]["name"] = f"Oraclelinux {distro[1]}"
                 platforms[OS]["arches"] = get_arches_for_platform(OS)
             elif "cm" in OS:
                 distro = OS.split("cm")
@@ -1385,6 +1389,9 @@ class ManagerGenerate(Manager):
             elif "rockylinux" in tags:
                 rockylinux_tags = tags.split("-")
                 distros_list.append(rockylinux_tags[len(rockylinux_tags) - 1])
+            elif "oraclelinux" in tags:
+                oraclelinux_tags = tags.split("-")
+                distros_list.append(oraclelinux_tags[len(oraclelinux_tags) - 1])
             elif "amzn" in tags:
                 amazonlinux_tags = tags.split("-")
                 distros_list.append(amazonlinux_tags[len(amazonlinux_tags) - 1])
