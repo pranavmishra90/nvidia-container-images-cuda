@@ -723,6 +723,11 @@ Please see [CUDA Container Support Policy](https://gitlab.com/nvidia/container-i
 - `11.0.3-cudnn8-runtime-centos7`
 - `11.0.3-devel-centos7`
 - `11.0.3-runtime-centos7`
+### azl3
+#### CUDA 12.9.0
+- `12.9.0-base-azl3`
+- `12.9.0-devel-azl3`
+- `12.9.0-runtime-azl3`
 ### amzn2023
 #### CUDA 12.9.0
 - `12.9.0-base-amzn2023`

@@ -36,7 +36,7 @@ Breaking changes are announced on [Gitlab Issue #209](https://gitlab.com/nvidia/
                     {% for value in path %}
                         {%  if value == release_key  %}
                             {% do vars.update({'label1':value}) %}
-                        {% elif ( value.startswith("centos") or  value.startswith("ubuntu") or value.startswith("ubi") or value.startswith("rockylinux") or value.startswith("amzn") or value.startswith("cm")) %}
+                        {% elif ( value.startswith("centos") or  value.startswith("ubuntu") or value.startswith("ubi") or value.startswith("rockylinux") or value.startswith("amzn") or value.startswith("cm") or value.startswith("oraclelinux") or value.startswith("azl")) %}
                             {% do vars.update({'label2':value}) %}
                         {% elif value in ("base", "devel", "runtime") %}
                             {% do vars.update({'label3':value}) %}
