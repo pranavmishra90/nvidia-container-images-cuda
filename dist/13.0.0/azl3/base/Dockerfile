@@ -44,8 +44,8 @@ RUN ${PKG_CMD} upgrade -y && ${PKG_CMD} install -y \
 # nvidia-docker 1.0
 RUN echo "/usr/local/cuda/lib64" >> /etc/ld.so.conf.d/nvidia.conf
 
-ENV PATH=/usr/local/cuda/bin:${PATH}
-ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64
+ENV PATH=/usr/local/nvidia/bin:/usr/local/cuda/bin:${PATH}
+ENV LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64:/usr/local/cuda/lib64
 
 COPY NGC-DL-CONTAINER-LICENSE /
 

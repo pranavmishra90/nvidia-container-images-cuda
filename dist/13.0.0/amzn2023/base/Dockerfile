@@ -32,7 +32,7 @@ RUN NVIDIA_GPGKEY_SUM=d0664fbbdb8c32356d45de36c5984617217b2d0bef41b93ccecd326ba3
 ENV CUDA_VERSION=13.0.0
 
 # Execute OS-specific custom commands
-RUN ${PKG_CMD} update glib2 --releasever 2023.8.20250721
+RUN ${PKG_CMD} update -y libxml2 glib2 --releasever 2023.8.20250721
 
 # For libraries in the cuda-compat-* package: https://docs.nvidia.com/cuda/eula/index.html#attachment-a
 RUN ${PKG_CMD} upgrade -y && ${PKG_CMD} install -y \
@@ -44,8 +44,8 @@ RUN ${PKG_CMD} upgrade -y && ${PKG_CMD} install -y \
 # nvidia-docker 1.0
 RUN echo "/usr/local/cuda/lib64" >> /etc/ld.so.conf.d/nvidia.conf
 
-ENV PATH=/usr/local/cuda/bin:${PATH}
-ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64
+ENV PATH=/usr/local/nvidia/bin:/usr/local/cuda/bin:${PATH}
+ENV LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64:/usr/local/cuda/lib64
 
 COPY NGC-DL-CONTAINER-LICENSE /
 
