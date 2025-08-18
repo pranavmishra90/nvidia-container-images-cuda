@@ -59,7 +59,7 @@ class ShipitData:
         funnel_distro = distro
         if (
             foo := supported_platforms.by_distro(funnel_distro)
-        ) and "rpm" in foo.package_format and foo.distro not in ['amzn', 'cm']:
+        ) and "rpm" in foo.package_format and foo.distro not in ['amzn', 'cm', 'azl']:
             funnel_distro = "rhel"
         self.arch = arch
         modified_distro_version = distro_version.replace(".", "")
@@ -201,7 +201,7 @@ class ShipitData:
         repo_distro = self.distro
         if (
             foo := supported_platforms.by_distro(repo_distro)
-        ) and "rpm" in foo.package_format and foo.distro not in ['amzn', 'cm']:
+        ) and "rpm" in foo.package_format and foo.distro not in ['amzn', 'cm', 'azl']:
             repo_distro = "rhel"
         clean_distro = "{}{}".format(repo_distro, self.distro_version.replace(".", ""))
         return (
@@ -209,7 +209,7 @@ class ShipitData:
             f"kitpicks/{self.product_name}/{self.release_label}/{self.candidate_number}/repos/{clean_distro}"
         )
 
-    def generate_shipit_manifest(self, output_path, cudnn_json_path=None):
+    def generate_shipit_manifest(self, output_path, cudnn_json_path=None, tensorrt_json_path=None):
         # 22:31 Tue Jul 13 2021 FIXME: (jesusa) this function is way too long to be considered good practice in python
         log.debug("Building the shipit manifest")
 
@@ -312,6 +312,9 @@ class ShipitData:
                     if not cudnn_json_path:
                         log.error("Argument `--cudnn-json-path` is not set!")
                         sys.exit(1)
+                    # TensorRT JSON path is optional for L4T
+                    if tensorrt_json_path:
+                        log.debug("TensorRT JSON path provided for L4T builds")
                     platform = f"{platform}"
 
                 self.output_path = pathlib.Path(f"{output_path}/{platform}")
@@ -355,6 +358,36 @@ class ShipitData:
                         log.debug(f"cudnn component\n{pp(cudnn_comp, output=False)}")
                         components.update(cudnn_comp)
 
+                # TEMP WAR: populate tensorrt component for L4T
+                if self.tegra and tensorrt_json_path:
+                    tensorrt_comp = {
+                        "tensorrt": {
+                            "version": "",
+                            "source": "",
+                            "dev": {"source": "", "md5sum": ""},
+                        }
+                    }
+                    log.debug(f"tensorrt_json_path: {tensorrt_json_path}")
+                    with open(pathlib.Path(tensorrt_json_path), "r") as f:
+                        tensorrt = json.loads(f.read())
+                    for rawObj in tensorrt:
+                        artf = DotDict(rawObj)
+                        log.debug(f"tensorrt json loop item\n{pp(artf, output=False)}")
+                        artdir = pathlib.Path(artf.path)
+                        artpath = f"https://urm.nvidia.com/artifactory/{artdir}"
+                        name = artdir.name
+                        if "arm64" in name:
+                            if "-dev_" in name:
+                                tensorrt_comp["tensorrt"]["dev"]["source"] = artpath
+                                tensorrt_comp["tensorrt"]["dev"]["md5sum"] = artf.md5
+                            else:
+                                tensorrt_comp["tensorrt"]["version"] = artf.props.version[0]
+                                tensorrt_comp["tensorrt"]["source"] = artpath
+                                tensorrt_comp["tensorrt"]["md5sum"] = artf.md5
+                    if tensorrt_comp:
+                        log.debug(f"tensorrt component\n{pp(tensorrt_comp, output=False)}")
+                        components.update(tensorrt_comp)
+
                 image_name = "gitlab-master.nvidia.com:5005/cuda-installer/cuda/release-candidate/cuda"
                 template_path = "templates/ubuntu"
                 if not self.tegra and "ubuntu" not in self.distro:
@@ -371,6 +404,10 @@ class ShipitData:
                 if "cm" in self.distro:
                     base_image = (
                         f"mcr.microsoft.com/cbl-mariner/base/core:{self.distro_version}.0"
+                    )
+                if "azl" in self.distro:
+                    base_image = (
+                        f"mcr.microsoft.com/azure-cli:azurelinux{self.distro_version}.0"
                     )
                 requires = ""
 

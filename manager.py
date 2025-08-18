@@ -839,10 +839,24 @@ class ManagerGenerate(Manager):
         help="File path to json encoded file containing cudnn package metadata.",
     )
 
+    tensorrt_json_path: Any = cli.SwitchAttr(
+        "--tensorrt-json-path",
+        str,
+        group="L4T",
+        help="File path to json encoded file containing tensorrt package metadata.",
+    )
+
     def cudnn_versions(self, arch: str) -> list[str]:
         obj = []
         for k, v in self.cuda[arch]["components"].items():
             if k.startswith("cudnn") and v:
+                obj.append(k)
+        return obj
+
+    def tensorrt_versions(self, arch: str) -> list[str]:
+        obj = []
+        for k, v in self.cuda[arch]["components"].items():
+            if k.startswith("tensorrt") and v:
                 obj.append(k)
         return obj
 
@@ -907,6 +921,36 @@ class ManagerGenerate(Manager):
                 new_ctx[larch]["cudnn"] = cudnn_manifest
 
         log.debug(f"cudnn template context {pp(new_ctx, output=False)}")
+        self.output_template(
+            input_template=input_template, output_path=output_path, ctx=new_ctx
+        )
+
+    def output_tensorrt_template(self, tensorrt_version_name, input_template, output_path):
+        new_ctx = {
+            "tensorrt": self.cuda["tensorrt"],
+            "version": self.cuda["version"],
+            "image_tag_suffix": self.cuda["image_tag_suffix"],
+            "os": self.cuda["os"],
+        }
+        for arch in self.arches:
+            larch = arch
+            if self.tegra:
+                larch = arches.tegra.container_arch
+            if not tensorrt_version_name in self.cuda[larch]["components"]:
+                continue
+            tensorrt_manifest = self.cuda[larch]["components"][tensorrt_version_name]
+            if tensorrt_manifest:
+                if "source" in tensorrt_manifest:
+                    tensorrt_manifest["basename"] = os.path.basename(
+                        tensorrt_manifest["source"]
+                    )
+                    tensorrt_manifest["dev"]["basename"] = os.path.basename(
+                        tensorrt_manifest["dev"]["source"]
+                    )
+                new_ctx[larch] = {}
+                new_ctx[larch]["tensorrt"] = tensorrt_manifest
+
+        log.debug(f"tensorrt template context {pp(new_ctx, output=False)}")
         self.output_template(
             input_template=input_template, output_path=output_path, ctx=new_ctx
         )
@@ -1049,6 +1093,21 @@ class ManagerGenerate(Manager):
                     output_path=pathlib.Path(f"{self.output_path}/{base_image}/{pkg}"),
                 )
 
+    def generate_tensorrt_scripts(self, base_image, input_template):
+        for arch in self.arches:
+            larch = arch
+            if self.tegra:
+                larch = arches.tegra.container_arch
+            for pkg in self.tensorrt_versions(larch):
+                if not "tensorrt" in self.cuda:
+                    self.cuda["tensorrt"] = {}
+                self.cuda["tensorrt"]["target"] = base_image
+                self.output_tensorrt_template(
+                    tensorrt_version_name=pkg,
+                    input_template=pathlib.Path(input_template),
+                    output_path=pathlib.Path(f"{self.output_path}/{base_image}/{pkg}"),
+                )
+
     def generate_containerscripts(self):
         for img in ["base", "devel", "runtime"]:
             self.cuda["target"] = img
@@ -1059,11 +1118,15 @@ class ManagerGenerate(Manager):
                 cudnn_template_path = pathlib.Path(
                     self.cuda["template_path"], f"cudnn/Dockerfile.jinja"
                 )
+                tensorrt_template_path = pathlib.Path(
+                    self.cuda["template_path"], f"tensorrt/Dockerfile.jinja"
+                )
                 input_template = f"{temp_path}/Dockerfile.jinja"
             else:
                 temp_path = pathlib.Path(self.cuda["template_path"])
                 input_template = pathlib.Path(temp_path, f"{img}-dockerfile.j2")
                 cudnn_template_path = pathlib.Path(temp_path, "cudnn-dockerfile.j2")
+                tensorrt_template_path = pathlib.Path(temp_path, "tensorrt-dockerfile.j2")
                 globber = f"{img}-*"
 
             log.debug(
@@ -1091,6 +1154,10 @@ class ManagerGenerate(Manager):
             if "base" not in img:
                 self.generate_cudnn_scripts(img, cudnn_template_path)
 
+            # tensorrt image
+            if "base" not in img:
+                self.generate_tensorrt_scripts(img, tensorrt_template_path)
+
     def generate_gitlab_pipelines(self):
 
         manifest = self.parent.manifest
@@ -1104,6 +1171,14 @@ class ManagerGenerate(Manager):
             comps = {}
             for comp, val in manifest[key][distro][arch]["components"].items():
                 if "cudnn" in comp and val:
+                    comps[comp] = {}
+                    comps[comp]["version"] = val["version"]
+            return comps
+
+        def get_tensorrt_components(key, distro, arch):
+            comps = {}
+            for comp, val in manifest[key][distro][arch]["components"].items():
+                if "tensorrt" in comp and val:
                     comps[comp] = {}
                     comps[comp]["version"] = val["version"]
             return comps
@@ -1204,6 +1279,19 @@ class ManagerGenerate(Manager):
                             arch
                         ] = cudnn_comps
 
+                    if (
+                        "tensorrt"
+                        not in ctx[cuda_version][pipeline_name]["distros"][distro]
+                    ):
+                        ctx[cuda_version][pipeline_name]["distros"][distro][
+                            "tensorrt"
+                        ] = {}
+                    tensorrt_comps = get_tensorrt_components(key, distro, arch)
+                    if tensorrt_comps:
+                        ctx[cuda_version][pipeline_name]["distros"][distro]["tensorrt"][
+                            arch
+                        ] = tensorrt_comps
+
         log.debug(f"template context: {pp(ctx, output=False)}")
         input_template = pathlib.Path("templates/gitlab/gitlab-ci.yml.jinja")
         with open(input_template) as f:
@@ -1240,9 +1328,11 @@ class ManagerGenerate(Manager):
                                 labels[1] = value
                             if "cudnn" in value:
                                 labels[2] = value
+                            if "tensorrt" in value:
+                                labels[2] = value
                             if value in ("base", "devel", "runtime"):
                                 labels[3] = value
-                            if re.compile(r"centos*|ubuntu*|ubi*|rocky*|amzn*|cm.").match(value):
+                            if re.compile(r"centos*|ubuntu*|ubi*|rocky*|oracle*|amzn*|cm.|azl.").match(value):
                                 operating_system = value.split("-")
                                 labels[4] = operating_system[0]
                                 dotdistro = labels[4]
@@ -1308,9 +1398,17 @@ class ManagerGenerate(Manager):
                 distro = OS.split("amzn")
                 platforms[OS]["name"] = f"Amzn {distro[1]}"
                 platforms[OS]["arches"] = get_arches_for_platform(OS)
+            elif "oracle" in OS:
+                distro = OS.split("oraclelinux")
+                platforms[OS]["name"] = f"Oraclelinux {distro[1]}"
+                platforms[OS]["arches"] = get_arches_for_platform(OS)
             elif "cm" in OS:
                 distro = OS.split("cm")
                 platforms[OS]["name"] = f"CM {distro[1]}"
+                platforms[OS]["arches"] = get_arches_for_platform(OS)
+            elif "azl" in OS:
+                distro = OS.split("azl")
+                platforms[OS]["name"] = f"AZL {distro[1]}"
                 platforms[OS]["arches"] = get_arches_for_platform(OS)
             else:
                 distro = OS.split("ubi")
@@ -1385,10 +1483,16 @@ class ManagerGenerate(Manager):
             elif "rockylinux" in tags:
                 rockylinux_tags = tags.split("-")
                 distros_list.append(rockylinux_tags[len(rockylinux_tags) - 1])
+            elif "oraclelinux" in tags:
+                oraclelinux_tags = tags.split("-")
+                distros_list.append(oraclelinux_tags[len(oraclelinux_tags) - 1])
             elif "amzn" in tags:
                 amazonlinux_tags = tags.split("-")
                 distros_list.append(amazonlinux_tags[len(amazonlinux_tags) - 1])
             elif "cm" in tags:
+                azurelinux_tags = tags.split("-")
+                distros_list.append(azurelinux_tags[len(azurelinux_tags) - 1])
+            elif "azl" in tags:
                 azurelinux_tags = tags.split("-")
                 distros_list.append(azurelinux_tags[len(azurelinux_tags) - 1])
         distros_set = set(distros_list)
@@ -1469,7 +1573,7 @@ class ManagerGenerate(Manager):
         log.debug("Generating all container scripts!")
         rgx = re.compile(
             # use regex101.com to debug with gitlab-ci.yml as the search text
-            r"^(?P<distro>[a-zA-Z]*)(?P<distro_version>[\d\.]*)-v(?P<cuda_version>[\d\.]*)(?:-(?!cudnn|test|scan|deploy)(?P<pipeline_name>\w+))?$"
+            r"^(?P<distro>[a-zA-Z]*)(?P<distro_version>[\d\.]*)-v(?P<cuda_version>[\d\.]*)(?:-(?!cudnn|tensorrt|test|scan|deploy)(?P<pipeline_name>\w+))?$"
         )
         for ci_job, _ in self.parent.ci.items():
             if (match := rgx.match(ci_job)) is None:
@@ -1600,7 +1704,7 @@ class ManagerGenerate(Manager):
             self.dist_base_path = pathlib.Path("kitpick")
             self.shipitdata = ShipitData(self.parent.shipit_uuid)
             self.shipitdata.generate_shipit_manifest(
-                self.dist_base_path, self.cudnn_json_path
+                self.dist_base_path, self.cudnn_json_path, self.tensorrt_json_path
             )
             if self.generate_all:
                 self.target_all_kitmaker()
