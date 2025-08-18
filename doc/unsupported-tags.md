@@ -12,6 +12,18 @@ Please see [CUDA Container Support Policy](https://gitlab.com/nvidia/container-i
 
 
 ### ubuntu24.04
+#### CUDA 12.9.0
+- `12.9.0-base-ubuntu24.04`
+- `12.9.0-cudnn-devel-ubuntu24.04`
+- `12.9.0-cudnn-runtime-ubuntu24.04`
+- `12.9.0-devel-ubuntu24.04`
+- `12.9.0-runtime-ubuntu24.04`
+#### CUDA 12.8.0
+- `12.8.0-base-ubuntu24.04`
+- `12.8.0-cudnn-devel-ubuntu24.04`
+- `12.8.0-cudnn-runtime-ubuntu24.04`
+- `12.8.0-devel-ubuntu24.04`
+- `12.8.0-runtime-ubuntu24.04`
 #### CUDA 12.6.2
 - `12.6.2-base-ubuntu24.04`
 - `12.6.2-cudnn-devel-ubuntu24.04`
@@ -31,6 +43,18 @@ Please see [CUDA Container Support Policy](https://gitlab.com/nvidia/container-i
 - `12.6.0-devel-ubuntu24.04`
 - `12.6.0-runtime-ubuntu24.04`
 ### ubuntu22.04
+#### CUDA 12.9.0
+- `12.9.0-base-ubuntu22.04`
+- `12.9.0-cudnn-devel-ubuntu22.04`
+- `12.9.0-cudnn-runtime-ubuntu22.04`
+- `12.9.0-devel-ubuntu22.04`
+- `12.9.0-runtime-ubuntu22.04`
+#### CUDA 12.8.0
+- `12.8.0-base-ubuntu22.04`
+- `12.8.0-cudnn-devel-ubuntu22.04`
+- `12.8.0-cudnn-runtime-ubuntu22.04`
+- `12.8.0-devel-ubuntu22.04`
+- `12.8.0-runtime-ubuntu22.04`
 #### CUDA 12.6.2
 - `12.6.2-base-ubuntu22.04`
 - `12.6.2-cudnn-devel-ubuntu22.04`
@@ -82,6 +106,18 @@ Please see [CUDA Container Support Policy](https://gitlab.com/nvidia/container-i
 - `12.0.0-devel-ubuntu22.04`
 - `12.0.0-runtime-ubuntu22.04`
 ### ubuntu20.04
+#### CUDA 12.9.0
+- `12.9.0-base-ubuntu20.04`
+- `12.9.0-cudnn-devel-ubuntu20.04`
+- `12.9.0-cudnn-runtime-ubuntu20.04`
+- `12.9.0-devel-ubuntu20.04`
+- `12.9.0-runtime-ubuntu20.04`
+#### CUDA 12.8.0
+- `12.8.0-base-ubuntu20.04`
+- `12.8.0-cudnn-devel-ubuntu20.04`
+- `12.8.0-cudnn-runtime-ubuntu20.04`
+- `12.8.0-devel-ubuntu20.04`
+- `12.8.0-runtime-ubuntu20.04`
 #### CUDA 12.6.2
 - `12.6.2-base-ubuntu20.04`
 - `12.6.2-cudnn-devel-ubuntu20.04`
@@ -223,6 +259,18 @@ Please see [CUDA Container Support Policy](https://gitlab.com/nvidia/container-i
 - `11.0.3-devel-ubuntu16.04`
 - `11.0.3-runtime-ubuntu16.04`
 ### ubi9
+#### CUDA 12.9.0
+- `12.9.0-base-ubi9`
+- `12.9.0-cudnn-devel-ubi9`
+- `12.9.0-cudnn-runtime-ubi9`
+- `12.9.0-devel-ubi9`
+- `12.9.0-runtime-ubi9`
+#### CUDA 12.8.0
+- `12.8.0-base-ubi9`
+- `12.8.0-cudnn-devel-ubi9`
+- `12.8.0-cudnn-runtime-ubi9`
+- `12.8.0-devel-ubi9`
+- `12.8.0-runtime-ubi9`
 #### CUDA 12.6.2
 - `12.6.2-base-ubi9`
 - `12.6.2-cudnn-devel-ubi9`
@@ -268,6 +316,18 @@ Please see [CUDA Container Support Policy](https://gitlab.com/nvidia/container-i
 - `12.1.0-devel-ubi9`
 - `12.1.0-runtime-ubi9`
 ### ubi8
+#### CUDA 12.9.0
+- `12.9.0-base-ubi8`
+- `12.9.0-cudnn-devel-ubi8`
+- `12.9.0-cudnn-runtime-ubi8`
+- `12.9.0-devel-ubi8`
+- `12.9.0-runtime-ubi8`
+#### CUDA 12.8.0
+- `12.8.0-base-ubi8`
+- `12.8.0-cudnn-devel-ubi8`
+- `12.8.0-cudnn-runtime-ubi8`
+- `12.8.0-devel-ubi8`
+- `12.8.0-runtime-ubi8`
 #### CUDA 12.6.2
 - `12.6.2-base-ubi8`
 - `12.6.2-cudnn-devel-ubi8`
@@ -408,6 +468,18 @@ Please see [CUDA Container Support Policy](https://gitlab.com/nvidia/container-i
 - `11.0.3-devel-ubi7`
 - `11.0.3-runtime-ubi7`
 ### rockylinux9
+#### CUDA 12.9.0
+- `12.9.0-base-rockylinux9`
+- `12.9.0-cudnn-devel-rockylinux9`
+- `12.9.0-cudnn-runtime-rockylinux9`
+- `12.9.0-devel-rockylinux9`
+- `12.9.0-runtime-rockylinux9`
+#### CUDA 12.8.0
+- `12.8.0-base-rockylinux9`
+- `12.8.0-cudnn-devel-rockylinux9`
+- `12.8.0-cudnn-runtime-rockylinux9`
+- `12.8.0-devel-rockylinux9`
+- `12.8.0-runtime-rockylinux9`
 #### CUDA 12.6.2
 - `12.6.2-base-rockylinux9`
 - `12.6.2-cudnn-devel-rockylinux9`
@@ -453,6 +525,18 @@ Please see [CUDA Container Support Policy](https://gitlab.com/nvidia/container-i
 - `12.1.0-devel-rockylinux9`
 - `12.1.0-runtime-rockylinux9`
 ### rockylinux8
+#### CUDA 12.9.0
+- `12.9.0-base-rockylinux8`
+- `12.9.0-cudnn-devel-rockylinux8`
+- `12.9.0-cudnn-runtime-rockylinux8`
+- `12.9.0-devel-rockylinux8`
+- `12.9.0-runtime-rockylinux8`
+#### CUDA 12.8.0
+- `12.8.0-base-rockylinux8`
+- `12.8.0-cudnn-devel-rockylinux8`
+- `12.8.0-cudnn-runtime-rockylinux8`
+- `12.8.0-devel-rockylinux8`
+- `12.8.0-runtime-rockylinux8`
 #### CUDA 12.6.2
 - `12.6.2-base-rockylinux8`
 - `12.6.2-cudnn-devel-rockylinux8`
@@ -533,7 +617,41 @@ Please see [CUDA Container Support Policy](https://gitlab.com/nvidia/container-i
 - `11.0.3-cudnn8-runtime-rockylinux8`
 - `11.0.3-devel-rockylinux8`
 - `11.0.3-runtime-rockylinux8`
+### oraclelinux9
+#### CUDA 12.9.0
+- `12.9.0-base-oraclelinux9`
+- `12.9.0-cudnn-devel-oraclelinux9`
+- `12.9.0-cudnn-runtime-oraclelinux9`
+- `12.9.0-devel-oraclelinux9`
+- `12.9.0-runtime-oraclelinux9`
+#### CUDA 12.8.0
+- `12.8.0-base-oraclelinux9`
+- `12.8.0-cudnn-devel-oraclelinux9`
+- `12.8.0-cudnn-runtime-oraclelinux9`
+- `12.8.0-devel-oraclelinux9`
+- `12.8.0-runtime-oraclelinux9`
+### oraclelinux8
+#### CUDA 12.9.0
+- `12.9.0-base-oraclelinux8`
+- `12.9.0-cudnn-devel-oraclelinux8`
+- `12.9.0-cudnn-runtime-oraclelinux8`
+- `12.9.0-devel-oraclelinux8`
+- `12.9.0-runtime-oraclelinux8`
+#### CUDA 12.8.0
+- `12.8.0-base-oraclelinux8`
+- `12.8.0-cudnn-devel-oraclelinux8`
+- `12.8.0-cudnn-runtime-oraclelinux8`
+- `12.8.0-devel-oraclelinux8`
+- `12.8.0-runtime-oraclelinux8`
 ### cm2
+#### CUDA 12.9.0
+- `12.9.0-base-cm2`
+- `12.9.0-devel-cm2`
+- `12.9.0-runtime-cm2`
+#### CUDA 12.8.0
+- `12.8.0-base-cm2`
+- `12.8.0-devel-cm2`
+- `12.8.0-runtime-cm2`
 #### CUDA 12.6.2
 - `12.6.2-base-cm2`
 - `12.6.2-devel-cm2`
@@ -605,7 +723,20 @@ Please see [CUDA Container Support Policy](https://gitlab.com/nvidia/container-i
 - `11.0.3-cudnn8-runtime-centos7`
 - `11.0.3-devel-centos7`
 - `11.0.3-runtime-centos7`
+### azl3
+#### CUDA 12.9.0
+- `12.9.0-base-azl3`
+- `12.9.0-devel-azl3`
+- `12.9.0-runtime-azl3`
 ### amzn2023
+#### CUDA 12.9.0
+- `12.9.0-base-amzn2023`
+- `12.9.0-devel-amzn2023`
+- `12.9.0-runtime-amzn2023`
+#### CUDA 12.8.0
+- `12.8.0-base-amzn2023`
+- `12.8.0-devel-amzn2023`
+- `12.8.0-runtime-amzn2023`
 #### CUDA 12.6.2
 - `12.6.2-base-amzn2023`
 - `12.6.2-devel-amzn2023`

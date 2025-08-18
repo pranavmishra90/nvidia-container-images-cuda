@@ -101,7 +101,7 @@ This is not a bug.
 
 Three flavors of images are provided:
 - `base`: Includes the CUDA runtime (cudart)
-- `runtime`: Builds on the `base` and includes the [CUDA math libraries](https://developer.nvidia.com/gpu-accelerated-libraries), and [NCCL](https://developer.nvidia.com/nccl). A `runtime` image that also includes [cuDNN](https://developer.nvidia.com/cudnn) is available.
+- `runtime`: Builds on the `base` and includes the [CUDA math libraries](https://developer.nvidia.com/gpu-accelerated-libraries), and [NCCL](https://developer.nvidia.com/nccl). A `runtime` image that also includes [cuDNN](https://developer.nvidia.com/cudnn) is available. Some images may also include [TensorRT](https://developer.nvidia.com/tensorrt).
 - `devel`: Builds on the `runtime` and includes headers, development tools for building CUDA images. These images are particularly useful for multi-stage builds.
 
 The Dockerfiles for the images are open-source and licensed under 3-clause BSD. For more information see the Supported Tags section below.
@@ -120,7 +120,7 @@ After it has been determined the problem is not with the NVIDIA runtime, report 
 
 ## Supported tags
 
-Supported tags are updated to the latest CUDA and cuDNN versions. These tags are also periodically updated to fix CVE vulnerabilities.
+Supported tags are updated to the latest CUDA, cuDNN, and TensorRT versions. These tags are also periodically updated to fix CVE vulnerabilities.
 
 For a full list of supported tags, click [*here*](https://gitlab.com/nvidia/container-images/cuda/blob/master/doc/supported-tags.md).
 
