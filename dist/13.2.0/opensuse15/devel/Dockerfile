@@ -1,0 +1,44 @@
+ARG IMAGE_NAME
+FROM ${IMAGE_NAME}:13.2.0-runtime-opensuse15 AS base
+
+ENV PKG_CMD=zypper
+
+FROM base AS base-amd64
+
+ENV NV_CUDA_LIB_VERSION=13.2.0-1
+ENV NV_CUDA_CUDART_DEV_VERSION=13.2.51-1
+ENV NV_NVML_DEV_VERSION=13.2.51-1
+ENV NV_LIBCUBLAS_DEV_VERSION=13.3.0.5-1
+ENV NV_LIBNPP_DEV_VERSION=13.1.0.44-1
+ENV NV_LIBNPP_DEV_PACKAGE=libnpp-devel-13-2-${NV_LIBNPP_DEV_VERSION}
+ENV NV_CUDA_NSIGHT_COMPUTE_VERSION=13.2.0-1
+ENV NV_CUDA_NSIGHT_COMPUTE_DEV_PACKAGE=cuda-nsight-compute-13-2-${NV_CUDA_NSIGHT_COMPUTE_VERSION}
+
+
+FROM base-${TARGETARCH}
+
+ARG TARGETARCH
+
+LABEL maintainer="NVIDIA CORPORATION <sw-cuda-installer@nvidia.com>"
+
+RUN ${PKG_CMD} --non-interactive --gpg-auto-import-keys install \
+    make \
+    findutils \
+    cuda-command-line-tools-13-2-${NV_CUDA_LIB_VERSION} \
+    cuda-libraries-devel-13-2-${NV_CUDA_LIB_VERSION} \
+    cuda-minimal-build-13-2-${NV_CUDA_LIB_VERSION} \
+    cuda-cudart-devel-13-2-${NV_CUDA_CUDART_DEV_VERSION} \
+    cuda-nvml-devel-13-2-${NV_NVML_DEV_VERSION} \
+    libcublas-devel-13-2-${NV_LIBCUBLAS_DEV_VERSION} \
+    ${NV_LIBNPP_DEV_PACKAGE} \
+    ${NV_CUDA_NSIGHT_COMPUTE_DEV_PACKAGE} \
+    && ${PKG_CMD} clean -a \
+    && rm -rf /var/cache/zypp/*
+
+# Create symlink for nsys if included in nsight-compute package
+RUN NSYS_PATH=$(find /opt/nvidia/nsight-compute -type f -name "nsys" 2>/dev/null | head -n 1); \
+    if [ -n "$NSYS_PATH" ] && [ ! -f /usr/local/bin/nsys ]; then \
+        ln -s "$NSYS_PATH" /usr/local/bin/nsys; \
+    fi
+
+ENV LIBRARY_PATH=/usr/local/cuda/lib64/stubs

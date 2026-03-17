@@ -803,6 +803,23 @@ Please see [CUDA Container Support Policy](https://gitlab.com/nvidia/container-i
 - `12.8.0-cudnn-runtime-oraclelinux8`
 - `12.8.0-devel-oraclelinux8`
 - `12.8.0-runtime-oraclelinux8`
+### opensuse15
+#### CUDA 13.1.0
+- `13.1.0-base-opensuse15`
+- `13.1.0-devel-opensuse15`
+- `13.1.0-runtime-opensuse15`
+#### CUDA 13.0.1
+- `13.0.1-base-opensuse15`
+- `13.0.1-cudnn-devel-opensuse15`
+- `13.0.1-cudnn-runtime-opensuse15`
+- `13.0.1-devel-opensuse15`
+- `13.0.1-runtime-opensuse15`
+#### CUDA 13.0.0
+- `13.0.0-base-opensuse15`
+- `13.0.0-cudnn-devel-opensuse15`
+- `13.0.0-cudnn-runtime-opensuse15`
+- `13.0.0-devel-opensuse15`
+- `13.0.0-runtime-opensuse15`
 ### cm2
 #### CUDA 13.0.1
 - `13.0.1-base-cm2`
