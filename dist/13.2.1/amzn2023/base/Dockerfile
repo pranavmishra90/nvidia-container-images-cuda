@@ -32,6 +32,7 @@ RUN NVIDIA_GPGKEY_SUM=d0664fbbdb8c32356d45de36c5984617217b2d0bef41b93ccecd326ba3
 ENV CUDA_VERSION=13.2.1
 
 # Execute OS-specific custom commands
+RUN ${PKG_CMD} update --releasever 2023.11.20260413 -y
 
 # Add Red Hat UBI AppStream repository for additional packages
 
