@@ -229,7 +229,7 @@ push_repos:
     user: ARTIFACTORY_USER
     pass: ARTIFACTORY_PASS
     registry:
-      arm64: urm.nvidia.com/sw-gpu-cuda-installer-docker-local/cuda/l4t-cuda
+      arm64: artifactory.nvidia.com/sw-gpu-cuda-installer-docker-local/cuda/l4t-cuda
 
 cuda_v11.0_l4t:
   dist_base_path: dist/10.2/l4t
@@ -268,9 +268,9 @@ push_repos:
     user: ARTIFACTORY_USER
     pass: ARTIFACTORY_PASS
     registry:
-      x86_64: urm.nvidia.com/sw-gpu-cuda-installer-docker-local/cuda
-      ppc64le: urm.nvidia.com/sw-gpu-cuda-installer-docker-local/cuda/cuda-ppc64le
-      arm64: urm.nvidia.com/sw-gpu-cuda-installer-docker-local/cuda/cuda-arm64
+      x86_64: artifactory.nvidia.com/sw-gpu-cuda-installer-docker-local/cuda
+      ppc64le: artifactory.nvidia.com/sw-gpu-cuda-installer-docker-local/cuda/cuda-ppc64le
+      arm64: artifactory.nvidia.com/sw-gpu-cuda-installer-docker-local/cuda/cuda-arm64
 ```
 
 `push_repos` accepts an arbitrary number of key:value pairs of potential image repositories.

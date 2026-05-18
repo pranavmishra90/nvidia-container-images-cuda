@@ -413,7 +413,7 @@ prepare:
           # kitmaker_webhook_failed
           exit 1
       fi
-      cat $MANIFEST | grep ".*urm.nvidia.com\/sw-gpu-cuda-installer-docker-local\/" | cut -f2 -d: | head -n 1 | xargs >> ${TAG_MANIFEST_PATH}
+      cat $MANIFEST | grep ".*artifactory.nvidia.com\/sw-gpu-cuda-installer-docker-local\/" | cut -f2 -d: | head -n 1 | xargs >> ${TAG_MANIFEST_PATH}
       run_cmd cat ${TAG_MANIFEST_PATH}
       set +x
       # kitmaker_cleanup_webhook_success

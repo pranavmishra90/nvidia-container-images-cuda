@@ -3,10 +3,10 @@
 push_repos:
   artifactory:
     only_if: NV_ARTIFACTORY
-    registry: urm.nvidia.com
+    registry: artifactory.nvidia.com
     user: ARTIFACTORY_USER
     pass: ARTIFACTORY_PASS
-    image_name: urm.nvidia.com/sw-gpu-cuda-installer-docker-local/cuda
+    image_name: artifactory.nvidia.com/sw-gpu-cuda-installer-docker-local/cuda
   ngc:
     only_if: NVCR_TOKEN
     registry: nvcr.io
@@ -2790,7 +2790,7 @@ cuda_v13.1.1:
 push_repos:
   artifactory:
     pass: ARTIFACTORY_PASS
-    registry: urm.nvidia.com
+    registry: artifactory.nvidia.com
     user: ARTIFACTORY_USER
 
 cuda_v13.1.0:
@@ -3451,7 +3451,7 @@ cuda_v13.1.0:
 push_repos:
   artifactory:
     pass: ARTIFACTORY_PASS
-    registry: urm.nvidia.com
+    registry: artifactory.nvidia.com
     user: ARTIFACTORY_USER
 
 cuda_v13.0.3:
@@ -4670,7 +4670,7 @@ cuda_v13.0.2:
 push_repos:
   artifactory:
     pass: ARTIFACTORY_PASS
-    registry: urm.nvidia.com
+    registry: artifactory.nvidia.com
     user: ARTIFACTORY_USER
 
 cuda_v13.0.1:
@@ -5361,7 +5361,7 @@ cuda_v13.0.1:
 push_repos:
   artifactory:
     pass: ARTIFACTORY_PASS
-    registry: urm.nvidia.com
+    registry: artifactory.nvidia.com
     user: ARTIFACTORY_USER
 
 cuda_v13.0.0:
@@ -6052,7 +6052,7 @@ cuda_v13.0.0:
 push_repos:
   artifactory:
     pass: ARTIFACTORY_PASS
-    registry: urm.nvidia.com
+    registry: artifactory.nvidia.com
     user: ARTIFACTORY_USER
 
 cuda_v12.9.2:
@@ -7453,7 +7453,7 @@ cuda_v12.9.1:
 push_repos:
   artifactory:
     pass: ARTIFACTORY_PASS
-    registry: urm.nvidia.com
+    registry: artifactory.nvidia.com
     user: ARTIFACTORY_USER
 
 cuda_v12.9.0:
@@ -8156,7 +8156,7 @@ cuda_v12.9.0:
 push_repos:
   artifactory:
     pass: ARTIFACTORY_PASS
-    registry: urm.nvidia.com
+    registry: artifactory.nvidia.com
     user: ARTIFACTORY_USER
 
 cuda_v12.8.2:
@@ -9321,7 +9321,7 @@ cuda_v12.8.1:
 push_repos:
   artifactory:
     pass: ARTIFACTORY_PASS
-    registry: urm.nvidia.com
+    registry: artifactory.nvidia.com
     user: ARTIFACTORY_USER
 
 cuda_v12.8.0:
@@ -9906,7 +9906,7 @@ cuda_v12.8.0:
 push_repos:
   artifactory:
     pass: ARTIFACTORY_PASS
-    registry: urm.nvidia.com
+    registry: artifactory.nvidia.com
     user: ARTIFACTORY_USER
 
 
@@ -10492,7 +10492,7 @@ cuda_v12.6.3:
 push_repos:
   artifactory:
     pass: ARTIFACTORY_PASS
-    registry: urm.nvidia.com
+    registry: artifactory.nvidia.com
     user: ARTIFACTORY_USER
 
 cuda_v12.6.2:
@@ -10973,7 +10973,7 @@ cuda_v12.6.2:
 push_repos:
   artifactory:
     pass: ARTIFACTORY_PASS
-    registry: urm.nvidia.com
+    registry: artifactory.nvidia.com
     user: ARTIFACTORY_USER
 
 cuda_v12.6.1:
@@ -11558,7 +11558,7 @@ cuda_v12.6.1:
 push_repos:
   artifactory:
     pass: ARTIFACTORY_PASS
-    registry: urm.nvidia.com
+    registry: artifactory.nvidia.com
     user: ARTIFACTORY_USER
 
 cuda_v12.6.0:
@@ -12041,7 +12041,7 @@ cuda_v12.6.0:
 push_repos:
   artifactory:
     pass: ARTIFACTORY_PASS
-    registry: urm.nvidia.com
+    registry: artifactory.nvidia.com
     user: ARTIFACTORY_USER
 
 cuda_v12.5.1:
@@ -12476,7 +12476,7 @@ cuda_v12.5.1:
 push_repos:
   artifactory:
     pass: ARTIFACTORY_PASS
-    registry: urm.nvidia.com
+    registry: artifactory.nvidia.com
     user: ARTIFACTORY_USER
 
 cuda_v12.5.0:
@@ -12852,7 +12852,7 @@ cuda_v12.5.0:
 push_repos:
   artifactory:
     pass: ARTIFACTORY_PASS
-    registry: urm.nvidia.com
+    registry: artifactory.nvidia.com
     user: ARTIFACTORY_USER
 
 cuda_v12.4.1:
@@ -13253,7 +13253,7 @@ cuda_v12.4.1:
 push_repos:
   artifactory:
     pass: ARTIFACTORY_PASS
-    registry: urm.nvidia.com
+    registry: artifactory.nvidia.com
     user: ARTIFACTORY_USER
 
 cuda_v12.4.0:
@@ -13710,7 +13710,7 @@ cuda_v12.4.0:
 push_repos:
   artifactory:
     pass: ARTIFACTORY_PASS
-    registry: urm.nvidia.com
+    registry: artifactory.nvidia.com
     user: ARTIFACTORY_USER
 
 .requires_v12.3.2: &cuda12_3_2_requires
