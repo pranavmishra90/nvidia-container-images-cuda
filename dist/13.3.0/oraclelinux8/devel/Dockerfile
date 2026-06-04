@@ -1,0 +1,55 @@
+ARG IMAGE_NAME
+FROM ${IMAGE_NAME}:13.3.0-runtime-oraclelinux8 AS base
+
+ENV PKG_CMD=yum
+
+FROM base AS base-amd64
+
+ENV NV_CUDA_LIB_VERSION=13.3.0-1
+ENV NV_CUDA_CUDART_DEV_VERSION=13.3.29-1
+ENV NV_NVML_DEV_VERSION=13.3.29-1
+ENV NV_LIBCUBLAS_DEV_VERSION=13.5.1.27-1
+ENV NV_LIBNPP_DEV_VERSION=13.1.2.48-1
+ENV NV_LIBNPP_DEV_PACKAGE=libnpp-devel-13-3-${NV_LIBNPP_DEV_VERSION}
+ENV NV_CUDA_NSIGHT_COMPUTE_VERSION=13.3.0-1
+ENV NV_CUDA_NSIGHT_COMPUTE_DEV_PACKAGE=cuda-nsight-compute-13-3-${NV_CUDA_NSIGHT_COMPUTE_VERSION}
+
+FROM base AS base-arm64
+
+ENV NV_CUDA_LIB_VERSION=13.3.0-1
+ENV NV_CUDA_CUDART_DEV_VERSION=13.3.29-1
+ENV NV_NVML_DEV_VERSION=13.3.29-1
+ENV NV_LIBCUBLAS_DEV_VERSION=13.5.1.27-1
+ENV NV_LIBNPP_DEV_VERSION=13.1.2.48-1
+ENV NV_LIBNPP_DEV_PACKAGE=libnpp-devel-13-3-${NV_LIBNPP_DEV_VERSION}
+ENV NV_CUDA_NSIGHT_COMPUTE_VERSION=13.3.0-1
+ENV NV_CUDA_NSIGHT_COMPUTE_DEV_PACKAGE=cuda-nsight-compute-13-3-${NV_CUDA_NSIGHT_COMPUTE_VERSION}
+
+
+FROM base-${TARGETARCH}
+
+ARG TARGETARCH
+
+LABEL maintainer="NVIDIA CORPORATION <sw-cuda-installer@nvidia.com>"
+
+RUN ${PKG_CMD} install -y \
+    make \
+    findutils \
+    cuda-command-line-tools-13-3-${NV_CUDA_LIB_VERSION} \
+    cuda-libraries-devel-13-3-${NV_CUDA_LIB_VERSION} \
+    cuda-minimal-build-13-3-${NV_CUDA_LIB_VERSION} \
+    cuda-cudart-devel-13-3-${NV_CUDA_CUDART_DEV_VERSION} \
+    cuda-nvml-devel-13-3-${NV_NVML_DEV_VERSION} \
+    libcublas-devel-13-3-${NV_LIBCUBLAS_DEV_VERSION} \
+    ${NV_LIBNPP_DEV_PACKAGE} \
+    ${NV_CUDA_NSIGHT_COMPUTE_DEV_PACKAGE} \
+    && ${PKG_CMD} clean all \
+    && rm -rf /var/cache/yum/*
+
+# Create symlink for nsys if included in nsight-compute package
+RUN NSYS_PATH=$(find /opt/nvidia/nsight-compute -type f -name "nsys" 2>/dev/null | head -n 1); \
+    if [ -n "$NSYS_PATH" ] && [ ! -f /usr/local/bin/nsys ]; then \
+        ln -s "$NSYS_PATH" /usr/local/bin/nsys; \
+    fi
+
+ENV LIBRARY_PATH=/usr/local/cuda/lib64/stubs

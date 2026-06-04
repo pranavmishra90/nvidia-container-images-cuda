@@ -50,6 +50,802 @@ unsupported:
    - 11.1.1 # Last supported TRD end-of-life. Tags will be removed from Dockerhub in six months (May 2024).
    - 11.0.3 # Last supported TRD end-of-life. Tags will be removed from Dockerhub in six months (May 2024).
 
+cuda_v13.3.0:
+  amzn2023:
+    arm64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libcusparse:
+          version: 12.8.1.7-1
+        libcusparse_dev:
+          version: 12.8.1.7-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+    base_image: amazonlinux:2023
+    template_path: templates/redhat
+    x86_64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libcusparse:
+          version: 12.8.1.7-1
+        libcusparse_dev:
+          version: 12.8.1.7-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+  azl3:
+    arm64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libcusparse:
+          version: 12.8.1.7-1
+        libcusparse_dev:
+          version: 12.8.1.7-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+    base_image: mcr.microsoft.com/azure-cli:azurelinux3.0
+    template_path: templates/redhat
+    x86_64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libcusparse:
+          version: 12.8.1.7-1
+        libcusparse_dev:
+          version: 12.8.1.7-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+  dist_base_path: dist/13.3.0
+  fedora44:
+    base_image: fedora:44
+    template_path: templates/redhat
+    x86_64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+  opensuse15:
+    base_image: opensuse/leap:15
+    template_path: templates/redhat
+    x86_64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libcusparse:
+          version: 12.8.1.7-1
+        libcusparse_dev:
+          version: 12.8.1.7-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+  oraclelinux8:
+    arm64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+    base_image: oraclelinux:8
+    template_path: templates/redhat
+    x86_64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+  oraclelinux9:
+    arm64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+    base_image: oraclelinux:9
+    template_path: templates/redhat
+    x86_64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+  push_repos:
+  - artifactory
+  release_label: 13.3.0
+  rockylinux10:
+    arm64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+    base_image: rockylinux/rockylinux:10
+    template_path: templates/redhat
+    x86_64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+  rockylinux8:
+    arm64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+    base_image: rockylinux/rockylinux:8
+    template_path: templates/redhat
+    x86_64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+  rockylinux9:
+    arm64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+    base_image: rockylinux/rockylinux:9
+    template_path: templates/redhat
+    x86_64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+  suse16:
+    arm64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libcusparse:
+          version: 12.8.1.7-1
+        libcusparse_dev:
+          version: 12.8.1.7-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+    base_image: opensuse/leap:16.0
+    template_path: templates/redhat
+    x86_64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libcusparse:
+          version: 12.8.1.7-1
+        libcusparse_dev:
+          version: 12.8.1.7-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+  ubi10:
+    arm64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+    base_image: registry.access.redhat.com/ubi10/ubi:latest
+    template_path: templates/redhat
+    x86_64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+  ubi8:
+    arm64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+    base_image: registry.access.redhat.com/ubi8/ubi:latest
+    template_path: templates/redhat
+    x86_64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+  ubi9:
+    arm64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+    base_image: registry.access.redhat.com/ubi9/ubi:latest
+    template_path: templates/redhat
+    x86_64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+  ubuntu22.04:
+    arm64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libcusparse:
+          version: 12.8.1.7-1
+        libcusparse_dev:
+          version: 12.8.1.7-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+    base_image: ubuntu:22.04
+    template_path: templates/ubuntu
+    x86_64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libcusparse:
+          version: 12.8.1.7-1
+        libcusparse_dev:
+          version: 12.8.1.7-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+  ubuntu24.04:
+    arm64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libcusparse:
+          version: 12.8.1.7-1
+        libcusparse_dev:
+          version: 12.8.1.7-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+    base_image: ubuntu:24.04
+    template_path: templates/ubuntu
+    x86_64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libcusparse:
+          version: 12.8.1.7-1
+        libcusparse_dev:
+          version: 12.8.1.7-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+  ubuntu26.04:
+    arm64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libcusparse:
+          version: 12.8.1.7-1
+        libcusparse_dev:
+          version: 12.8.1.7-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+    base_image: ubuntu:26.04
+    template_path: templates/ubuntu
+    x86_64:
+      components:
+        cudart:
+          version: 13.3.29-1
+        cudart_dev:
+          version: 13.3.29-1
+        libcublas:
+          version: 13.5.1.27-1
+        libcublas_dev:
+          version: 13.5.1.27-1
+        libcusparse:
+          version: 12.8.1.7-1
+        libcusparse_dev:
+          version: 12.8.1.7-1
+        libnpp:
+          version: 13.1.2.48-1
+        libnpp_dev:
+          version: 13.1.2.48-1
+        nsight_compute:
+          version: 13.3.0-1
+        nvml_dev:
+          version: 13.3.29-1
+        nvtx:
+          version: 13.3.29-1
+        profiler_api:
+          version: 13.3.27-1
+      requires: ''
+
 cuda_v13.2.1:
   amzn2023:
     arm64:
