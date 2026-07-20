@@ -412,7 +412,7 @@ test-pulse-vault:
         --header "Authorization: Basic $AuthHeader" \
         --header "Content-Type: application/x-www-form-urlencoded" \
         "$SSA_ISSUER_URL")
-      echo "$Response" | grep --quiet --extended-regexp '"access_token"[[:space:]]*:[[:space:]]*"[^"]+"'
+      echo "$Response" | grep -qE '"access_token"[[:space:]]*:[[:space:]]*"[^"]+"'
       echo "Vault credentials authenticated successfully with Pulse Security Service."
   rules:
     - if: '$TEST_PULSE_VAULT == "true"'
