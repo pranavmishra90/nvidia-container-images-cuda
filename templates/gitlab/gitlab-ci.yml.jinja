@@ -399,6 +399,7 @@ test-pulse-vault:
   extends:
     - .security_scan
     - .pulse_vault
+  image: {{ gitlab_builder_image }}
   stage: scan
   tags:
     - docker

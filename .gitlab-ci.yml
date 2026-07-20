@@ -395,6 +395,7 @@ test-pulse-vault:
   extends:
     - .security_scan
     - .pulse_vault
+  image: gitlab-master.nvidia.com:5005/cuda-installer/cuda/gitlab-cuda-builder
   stage: scan
   tags:
     - docker
