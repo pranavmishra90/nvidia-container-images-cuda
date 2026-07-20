@@ -399,7 +399,7 @@ test-pulse-vault:
   extends:
     - .security_scan
     - .pulse_vault
-  image: {{ gitlab_builder_image }}
+  image: curlimages/curl:8.10.1
   stage: scan
   tags:
     - docker
@@ -407,12 +407,12 @@ test-pulse-vault:
   script:
     - |
       AuthHeader=$(echo -n $VAULT_SSA_CLIENT_ID:$VAULT_SSA_CLIENT_SECRET | base64 | tr -d '\n')
-      curl --fail --silent --show-error \
+      Response=$(curl --fail --silent --show-error \
         --request POST \
         --header "Authorization: Basic $AuthHeader" \
         --header "Content-Type: application/x-www-form-urlencoded" \
-        "$SSA_ISSUER_URL" |
-        jq --exit-status '.access_token | length > 0' >/dev/null
+        "$SSA_ISSUER_URL")
+      echo "$Response" | grep --quiet --extended-regexp '"access_token"[[:space:]]*:[[:space:]]*"[^"]+"'
       echo "Vault credentials authenticated successfully with Pulse Security Service."
   rules:
     - if: '$TEST_PULSE_VAULT == "true"'
