@@ -61,6 +61,35 @@ before_script:
     SSA_ISSUER_URL: "https://${PSS_SSA_ID}.ssa.nvidia.com/token?grant_type=client_credentials&scope=${PSS_SSA_SCOPE}"
     IMAGE_ARCHIVE: "cuda-${CUDA_VERSION}-devel-${OS}${IMAGE_TAG_SUFFIX}.tar"
 
+.pulse_vault:
+  variables:
+    VAULT_SERVER_URL: "https://prod.vault.nvidia.com"
+    VAULT_NAMESPACE: "cuda-installer-automation"
+    VAULT_AUTH_PATH: "jwt/nvidia/gitlab-master"
+    VAULT_AUTH_ROLE: "gitlab-cuda-ro"
+  id_tokens:
+    VAULT_ID_TOKEN:
+      aud: "https://prod.vault.nvidia.com"
+  secrets:
+    VAULT_SSA_CLIENT_ID:
+      vault:
+        engine:
+          name: kv-v2
+          path: nvidia/services/ssa/clients/nvssa-prd-3u7v5jB9ZM_pR8sB7HKRFJTb7r5dIRhPHSu_RJWC7eE/kv
+        path: secret
+        field: id
+      file: false
+      token: $VAULT_ID_TOKEN
+    VAULT_SSA_CLIENT_SECRET:
+      vault:
+        engine:
+          name: kv-v2
+          path: nvidia/services/ssa/clients/nvssa-prd-3u7v5jB9ZM_pR8sB7HKRFJTb7r5dIRhPHSu_RJWC7eE/kv
+        path: secret
+        field: secret
+      file: false
+      token: $VAULT_ID_TOKEN
+
 stages:
   - prepare
   - trigger
@@ -323,6 +352,7 @@ prepare:
 .scan_template: &scan_definition
   extends:
     - .security_scan
+    - .pulse_vault
   stage: scan
   <<: *tags_definition
   script:
@@ -334,7 +364,7 @@ prepare:
 
       echo "Connection request with Pulse Security Service using SSA..."
 
-      AuthHeader=$(echo -n $SSA_CLIENT_ID:$SSA_CLIENT_SECRET | base64 | tr -d '\n')
+      AuthHeader=$(echo -n $VAULT_SSA_CLIENT_ID:$VAULT_SSA_CLIENT_SECRET | base64 | tr -d '\n')
       export SSA_TOKEN=$(curl --request POST --header "Authorization: Basic $AuthHeader" --header "Content-Type: application/x-www-form-urlencoded" ${SSA_ISSUER_URL} | jq ".access_token" |  tr -d '"')
 
       if [ -z "$SSA_TOKEN" ]; then
@@ -360,6 +390,28 @@ prepare:
       - licenses.json
       - sbom.json
       - vulns.json
+
+test-pulse-vault:
+  extends:
+    - .security_scan
+    - .pulse_vault
+  image: curlimages/curl:8.10.1
+  stage: scan
+  tags:
+    - docker
+  before_script: []
+  script:
+    - |
+      AuthHeader=$(echo -n $VAULT_SSA_CLIENT_ID:$VAULT_SSA_CLIENT_SECRET | base64 | tr -d '\n')
+      Response=$(curl --fail --silent --show-error \
+        --request POST \
+        --header "Authorization: Basic $AuthHeader" \
+        --header "Content-Type: application/x-www-form-urlencoded" \
+        "$SSA_ISSUER_URL")
+      echo "$Response" | grep -qE '"access_token"[[:space:]]*:[[:space:]]*"[^"]+"'
+      echo "Vault credentials authenticated successfully with Pulse Security Service."
+  rules:
+    - if: '$TEST_PULSE_VAULT == "true"'
 
 .deploy_template: &deploy_definition
   image: gitlab-master.nvidia.com:5005/cuda-installer/cuda/gitlab-cuda-builder
@@ -408,7 +460,7 @@ prepare:
           # kitmaker_webhook_failed
           exit 1
       fi
-      cat $MANIFEST | grep ".*urm.nvidia.com\/sw-gpu-cuda-installer-docker-local\/" | cut -f2 -d: | head -n 1 | xargs >> ${TAG_MANIFEST_PATH}
+      cat $MANIFEST | grep ".*artifactory.nvidia.com\/sw-gpu-cuda-installer-docker-local\/" | cut -f2 -d: | head -n 1 | xargs >> ${TAG_MANIFEST_PATH}
       run_cmd cat ${TAG_MANIFEST_PATH}
       set +x
       # kitmaker_cleanup_webhook_success
@@ -16368,4 +16420,3 @@ ubi7-v11.0.3-deploy:
       optional: true
     - job: ubi7-v11.0.3-scan-x86_64
       optional: true
-

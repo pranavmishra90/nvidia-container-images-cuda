@@ -1332,7 +1332,7 @@ class ManagerGenerate(Manager):
                                 labels[2] = value
                             if value in ("base", "devel", "runtime"):
                                 labels[3] = value
-                            if re.compile(r"centos*|ubuntu*|ubi*|rocky*|oracle*|amzn*|cm.|azl.").match(value):
+                            if re.compile(r"centos*|ubuntu*|ubi*|rocky*|oracle*|amzn*|cm.|azl.|opensuse*|suse*").match(value):
                                 operating_system = value.split("-")
                                 labels[4] = operating_system[0]
                                 dotdistro = labels[4]
@@ -1410,6 +1410,14 @@ class ManagerGenerate(Manager):
                 distro = OS.split("azl")
                 platforms[OS]["name"] = f"AZL {distro[1]}"
                 platforms[OS]["arches"] = get_arches_for_platform(OS)
+            elif "opensuse" in OS:
+                distro = OS.split("opensuse")
+                platforms[OS]["name"] = f"OpenSuse {distro[1]}"
+                platforms[OS]["arches"] = get_arches_for_platform(OS)
+            elif "suse" in OS:
+                distro = OS.split("suse")
+                platforms[OS]["name"] = f"Suse {distro[1]}"
+                platforms[OS]["arches"] = get_arches_for_platform(OS)                
             else:
                 distro = OS.split("ubi")
                 platforms[OS]["name"] = f"UBI {distro[1]}"
@@ -1483,6 +1491,12 @@ class ManagerGenerate(Manager):
             elif "rockylinux" in tags:
                 rockylinux_tags = tags.split("-")
                 distros_list.append(rockylinux_tags[len(rockylinux_tags) - 1])
+            elif "opensuse" in tags:
+                opensuse_tags = tags.split("-")
+                distros_list.append(opensuse_tags[len(opensuse_tags) - 1])
+            elif "suse" in tags:
+                suse_tags = tags.split("-")
+                distros_list.append(suse_tags[len(suse_tags) - 1])
             elif "oraclelinux" in tags:
                 oraclelinux_tags = tags.split("-")
                 distros_list.append(oraclelinux_tags[len(oraclelinux_tags) - 1])

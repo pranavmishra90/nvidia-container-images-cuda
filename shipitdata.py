@@ -344,7 +344,7 @@ class ShipitData:
                         artf = DotDict(rawObj)
                         log.debug(f"cudnn json loop item\n{pp(artf, output=False)}")
                         artdir = pathlib.Path(artf.path)
-                        artpath = f"https://urm.nvidia.com/artifactory/{artdir}"
+                        artpath = f"https://artifactory.nvidia.com/artifactory/{artdir}"
                         name = artdir.name
                         if "arm64" in name:
                             if "-dev_" in name:
@@ -374,7 +374,7 @@ class ShipitData:
                         artf = DotDict(rawObj)
                         log.debug(f"tensorrt json loop item\n{pp(artf, output=False)}")
                         artdir = pathlib.Path(artf.path)
-                        artpath = f"https://urm.nvidia.com/artifactory/{artdir}"
+                        artpath = f"https://artifactory.nvidia.com/artifactory/{artdir}"
                         name = artdir.name
                         if "arm64" in name:
                             if "-dev_" in name:

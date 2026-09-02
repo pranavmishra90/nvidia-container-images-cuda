@@ -9,3 +9,4 @@ opengl/
 pyrightconfig.json
 dist/**/runtime/*entrypoint*
 dist/**/runtime/deviceQuery/
+gen_cuda_yaml_section.py
